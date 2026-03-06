@@ -1047,6 +1047,7 @@
       </div>
       <div class="hero-actions">
         <button class="export-btn" onclick="window.print()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6V1h8v5"/><rect x="1" y="6" width="14" height="7" rx="1"/><path d="M4 10h8M4 13h8"/></svg> Print / Export</button>
+        <button class="export-btn export-btn-ghost" onclick="downloadJSON()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8"/><polyline points="5,7 8,10 11,7"/><path d="M2 12v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1"/></svg> Download JSON</button>
         <button class="export-btn export-btn-ghost" onclick="clearAllNotes()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a5 5 0 0 1 5-5 5 5 0 0 1 4.5 2.8"/><path d="M13 8a5 5 0 0 1-5 5 5 5 0 0 1-4.5-2.8"/><polyline points="14,3 14,6.5 10.5,6.5"/><polyline points="2,13 2,9.5 5.5,9.5"/></svg> Clear Notes</button>
       </div>
     </div>
@@ -1723,6 +1724,52 @@
       dot.classList.remove('saved');
       label.textContent = 'Saving…';
     }
+  }
+
+  function downloadJSON() {
+    const questions = {
+      b1: 'How long has Optimum Golf been open, and how long have you been in the GM role?',
+      b2: 'How many active members do you have right now, and where do you want that number to be?',
+      b3: 'What does a typical membership look like in terms of price and commitment length?',
+      b4: 'How predictable is revenue month to month right now?',
+      b5: 'What is the business doing in monthly revenue right now, roughly?',
+      s1: 'When a new lead comes in today, what actually happens? Walk me through it step by step.',
+      s2: 'How many NSAs are you booking per month, and what percentage convert to memberships?',
+      s3: 'Are leads falling through the cracks, or is the bigger issue visibility?',
+      s4: 'Who is currently managing Constant Contact and USchedule?',
+      m1: 'Are you also running anything on Meta, or is it just Google right now?',
+      m2: 'Outside of paid ads, where is most of your new business coming from?',
+      m3: 'Do you have any sense of your current cost per lead or cost per booked assessment?',
+      t1: 'Are you satisfied with the current Squarespace site, or would you prefer to start fresh?',
+      t2: 'Is Shepheard Marketing still involved, or is that a clean slate?',
+      d1: 'Does Brad need to be part of this conversation before a decision gets made?',
+      d2: 'What would make you feel confident you picked the right partner for this?',
+      d3: 'Do you have a budget range in mind, or are you letting the proposals inform that?',
+      wrapup: 'Call Wrap-Up Notes & Next Steps',
+    };
+
+    const data = {
+      exported: new Date().toISOString(),
+      client: 'Optimum Golf',
+      call: "Aaron's Discovery Call — March 2026",
+      notes: {},
+    };
+
+    noteIds.forEach(id => {
+      const el = document.getElementById('notes-' + id);
+      const value = el ? el.value.trim() : '';
+      if (value) {
+        data.notes[id] = { question: questions[id], answer: value };
+      }
+    });
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'optimum-golf-discovery-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   function clearAllNotes() {
