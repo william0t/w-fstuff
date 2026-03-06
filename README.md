@@ -1,3 +1,3 @@
 # w-fstuff
 William &amp; Friends things
-![optgolflogo](https://github.com/user-attachments/assets/052802ea-691b-45ed-bd6d-f78352fd0e3a)
+![logo](https://github.com/user-attachments/assets/ce4b6a56-183c-4b98-b78e-0f64a4e8dc14)
