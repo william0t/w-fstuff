@@ -66,6 +66,14 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .sidebar-logo img.og-logo {
+      width: 140px;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+      filter: brightness(1);
+    }
+
     .sidebar-logo .brand-wf {
       font-size: 10px;
       font-weight: 600;
@@ -281,6 +289,13 @@
       padding: 40px 48px 36px;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-logo {
+      width: 200px;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
     }
 
     .hero::before {
@@ -913,8 +928,9 @@
   <!-- ─── SIDEBAR ─── -->
   <aside class="sidebar">
     <div class="sidebar-logo">
+      <img class="og-logo" src="logo.png" alt="Optimum Golf" onerror="this.style.display='none'" />
       <div class="brand-wf">William &amp; Friends</div>
-      <div class="brand-name">Optimum Golf<br>Discovery Call</div>
+      <div class="brand-name">Discovery Call</div>
       <div class="brand-sub">March 2026 &nbsp;·&nbsp; Aaron / Brad</div>
     </div>
 
@@ -986,6 +1002,7 @@
 
     <!-- HERO -->
     <div class="hero">
+      <img class="hero-logo" src="logo.png" alt="Optimum Golf" onerror="this.style.display='none'" />
       <div class="hero-eyebrow">William &amp; Friends Growth Portal &nbsp;·&nbsp; Discovery Call</div>
       <h1 class="hero-title">Optimum Golf<br><span>Aaron's Discovery Call</span></h1>
       <p class="hero-sub">RiNo Indoor Golf Academy &nbsp;·&nbsp; Complete funnel rebuild &nbsp;·&nbsp; GHL Growth Portal walkthrough</p>
