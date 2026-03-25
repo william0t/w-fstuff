@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>William & Friends — The Growth Layer for Therapy Practices</title>
+  <meta name="description" content="W&F is the HIPAA-compliant marketing growth engine built exclusively for therapy and mental health practices. Works alongside your EHR.">
+  <link rel="stylesheet" href="_styles.css">
+
+  <style>
+    /* ─── Scroll Progress Bar ───────────────────────────────────────────────── */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--mid-blue));
+      z-index: 2000;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* ─── Hero Section ──────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 80px 0 60px; /* account for fixed nav */
+    }
+
+    /* ─── Blob Background ───────────────────────────────────────────────────── */
+    .hero-blobs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+    }
+
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--navy);
+      opacity: 0.055;
+      top: -120px;
+      left: -160px;
+      animation: blob-morph-1 18s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 480px;
+      height: 480px;
+      background: var(--orange);
+      opacity: 0.05;
+      bottom: -100px;
+      right: -80px;
+      animation: blob-morph-2 18s ease-in-out infinite 3s;
+    }
+
+    .blob-3 {
+      width: 400px;
+      height: 400px;
+      background: var(--mid-blue);
+      opacity: 0.055;
+      top: 40%;
+      left: 38%;
+      animation: blob-morph-3 18s ease-in-out infinite 7s;
+    }
+
+    @keyframes blob-morph-1 {
+      0%, 100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; transform: translate(0, 0) scale(1); }
+      33%       { border-radius: 40% 70% 30% 60% / 60% 30% 70% 40%; transform: translate(30px, 20px) scale(1.05); }
+      66%       { border-radius: 70% 30% 50% 50% / 30% 70% 50% 60%; transform: translate(-20px, 35px) scale(0.97); }
+    }
+
+    @keyframes blob-morph-2 {
+      0%, 100% { border-radius: 50% 60% 40% 70% / 60% 40% 70% 30%; transform: translate(0, 0) scale(1); }
+      33%       { border-radius: 70% 40% 60% 30% / 40% 60% 30% 70%; transform: translate(-25px, -20px) scale(1.06); }
+      66%       { border-radius: 30% 70% 50% 60% / 70% 30% 60% 40%; transform: translate(15px, -30px) scale(0.96); }
+    }
+
+    @keyframes blob-morph-3 {
+      0%, 100% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; transform: translate(0, 0) scale(1); }
+      50%       { border-radius: 60% 40% 45% 55% / 40% 60% 45% 55%; transform: translate(-18px, 22px) scale(1.04); }
+    }
+
+    /* ─── Radial Gradient Mesh Overlay ─────────────────────────────────────── */
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 5% 50%,  rgba(43, 90, 165, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 45% at 95% 20%, rgba(232, 113, 58, 0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 85%, rgba(30, 61, 111, 0.05) 0%, transparent 60%);
+    }
+
+    /* ─── Hero Grid ─────────────────────────────────────────────────────────── */
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* ─── Left Column ───────────────────────────────────────────────────────── */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border: 1.5px solid var(--orange);
+      border-radius: 100px;
+      width: fit-content;
+    }
+
+    .hero-badge span {
+      font-family: 'Sora', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      color: var(--navy);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-h1 .orange {
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1875rem; /* 19px */
+      font-weight: 400;
+      color: #4a5568;
+      line-height: 1.65;
+      max-width: 500px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-ctas .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    /* Trust bar */
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-trust-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: #6b7280;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .hero-trust-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .trust-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--light-gray);
+      border: 1px solid rgba(30, 61, 111, 0.12);
+      padding: 4px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .trust-pill-more {
+      font-size: 0.75rem;
+      color: var(--mid-blue);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 4px 4px;
+    }
+
+    /* ─── Right Column — Dashboard Card ────────────────────────────────────── */
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dashboard-card {
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow:
+        0 4px 6px rgba(30, 61, 111, 0.04),
+        0 20px 60px rgba(30, 61, 111, 0.14),
+        0 40px 80px rgba(30, 61, 111, 0.08);
+      padding: 28px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      /* Top gradient border */
+      border-top: 3px solid transparent;
+      background-clip: padding-box;
+      animation: card-float 7s ease-in-out infinite;
+    }
+
+    /* Gradient top border via pseudo-element */
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 22px 22px 0 0;
+      background: linear-gradient(90deg, var(--orange), var(--navy));
+    }
+
+    @keyframes card-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .card-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #6b7280;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .card-live-dot {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #10b981;
+      font-weight: 500;
+    }
+
+    .card-live-dot::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: live-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes live-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+      50%       { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+    }
+
+    /* Metric boxes */
+    .card-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .metric-box {
+      padding: 12px 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .metric-box.orange-bg {
+      background: rgba(232, 113, 58, 0.08);
+      border: 1px solid rgba(232, 113, 58, 0.18);
+    }
+
+    .metric-box.navy-bg {
+      background: rgba(30, 61, 111, 0.07);
+      border: 1px solid rgba(30, 61, 111, 0.15);
+    }
+
+    .metric-value {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.1;
+      display: block;
+    }
+
+    .metric-box.orange-bg .metric-value { color: var(--orange); }
+    .metric-box.navy-bg  .metric-value { color: var(--navy); }
+
+    .metric-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      color: #6b7280;
+      margin-top: 3px;
+      display: block;
+      font-weight: 500;
+    }
+
+    /* Progress bars */
+    .card-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .progress-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .progress-pct {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .progress-track {
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 0%; /* animated by JS */
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .progress-fill.orange { background: linear-gradient(90deg, var(--orange), #f09460); }
+    .progress-fill.navy   { background: linear-gradient(90deg, var(--mid-blue), var(--navy)); }
+    .progress-fill.green  { background: linear-gradient(90deg, #10b981, #34d399); }
+
+    /* ─── Floating Badges ───────────────────────────────────────────────────── */
+    .floating-badge {
+      position: absolute;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 32px rgba(30, 61, 111, 0.16), 0 2px 8px rgba(30, 61, 111, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .badge-bookings {
+      top: 8px;
+      right: -18px;
+      animation: badge-float-a 6s ease-in-out infinite 1.5s;
+    }
+
+    .badge-hipaa {
+      bottom: 28px;
+      left: -18px;
+      animation: badge-float-b 6s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes badge-float-a {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-8px) rotate(0.5deg); }
+    }
+
+    @keyframes badge-float-b {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-6px) rotate(-0.3deg); }
+    }
+
+    .badge-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .badge-icon.green { background: rgba(16, 185, 129, 0.12); }
+    .badge-icon.blue  { background: rgba(43, 90, 165, 0.1); }
+
+    .badge-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .badge-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .badge-top-line {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--dark);
+    }
+
+    .badge-sub-line {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      color: #6b7280;
+      font-weight: 400;
+    }
+
+    /* ─── Responsive ────────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .badge-bookings { right: -8px; }
+      .badge-hipaa    { left: -8px; }
+    }
+
+    @media (max-width: 768px) {
+      #hero {
+        padding: 90px 0 60px;
+        min-height: auto;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-right {
+        order: -1; /* card above text on mobile */
+      }
+
+      .dashboard-card {
+        max-width: 100%;
+      }
+
+      .badge-bookings {
+        top: -12px;
+        right: 8px;
+      }
+
+      .badge-hipaa {
+        bottom: -12px;
+        left: 8px;
+      }
+
+      .hero-h1 {
+        font-size: clamp(1.75rem, 7vw, 2.4rem);
+      }
+
+      .hero-sub {
+        font-size: 1.0625rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
+
+  <!-- ── Navigation ── -->
+  <!-- _nav.html inline -->
+  <link rel="stylesheet" href="_styles.css">
+  <style>
+    .wf-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0; transition: background 0.3s ease, box-shadow 0.3s ease; }
+    .wf-nav__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; transition: height 0.3s ease; }
+    .wf-nav:not(.stuck) { background: transparent; }
+    .wf-nav.stuck { background: rgba(255,255,255,0.88); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 1px 0 rgba(30,61,111,0.08), 0 4px 24px rgba(30,61,111,0.08); }
+    .wf-nav.stuck .wf-nav__inner { height: 64px; }
+    .wf-nav__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .wf-nav__logo-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); letter-spacing: -0.01em; white-space: nowrap; }
+    .wf-nav__links { display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none; }
+    .wf-nav__links a { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; color: var(--navy); padding: 8px 12px; border-radius: var(--radius); transition: color 0.2s ease, background 0.2s ease; white-space: nowrap; }
+    .wf-nav__links a:hover { color: var(--orange); background: rgba(232,113,58,0.06); }
+    .wf-nav__cta { font-family: 'Sora', sans-serif !important; font-weight: 700 !important; font-size: 0.875rem !important; padding: 10px 20px !important; background: var(--orange) !important; color: var(--white) !important; border: 2px solid var(--orange) !important; border-radius: var(--radius) !important; text-decoration: none; white-space: nowrap; transition: background 0.2s ease, transform 0.2s ease; flex-shrink: 0; }
+    .wf-nav__cta:hover { background: #d4622e !important; border-color: #d4622e !important; transform: translateY(-1px); }
+    .wf-nav__right { display: flex; align-items: center; gap: 8px; }
+    @media (max-width: 768px) { .wf-nav__links { display: none; } .wf-nav__inner { height: 60px; } .wf-nav.stuck .wf-nav__inner { height: 56px; } }
+  </style>
+
+  <nav class="wf-nav" id="wf-nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="wf-nav__inner">
+        <a href="/" class="wf-nav__logo" aria-label="William & Friends — Home">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <polygon points="16,2 30,28 2,28" fill="#1E3D6F"/>
+          </svg>
+          <span class="wf-nav__logo-text">William &amp; Friends</span>
+        </a>
+        <div class="wf-nav__right">
+          <ul class="wf-nav__links" role="list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/how-it-works">How It Works</a></li>
+            <li><a href="/ehr-integration">EHR Compatibility</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="wf-nav__cta">Book a Free Strategy Call</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div style="height:72px;" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+
+    <!-- Animated blobs -->
+    <div class="hero-blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Gradient mesh overlay -->
+    <div class="hero-mesh" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- ── Left: Copy ── -->
+        <div class="hero-left reveal">
+
+          <!-- Badge -->
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span>For Therapy Practices</span>
+          </div>
+
+          <!-- H1 -->
+          <h1 class="hero-h1">
+            More Clients.<br>
+            Less Guessing.<br>
+            Fully <span class="orange">HIPAA-Compliant.</span>
+          </h1>
+
+          <!-- Subhead -->
+          <p class="hero-sub">
+            W&amp;F is the marketing growth engine built exclusively for therapy practices — designed to work alongside your existing EHR, not replace it.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero-ctas">
+            <a href="/contact" class="btn-primary">Book Your Free Strategy Call &rarr;</a>
+            <a href="/how-it-works" class="btn-outline">See How It Works</a>
+          </div>
+
+          <!-- Trust bar -->
+          <div class="hero-trust">
+            <span class="hero-trust-label">Works with</span>
+            <div class="hero-trust-pills">
+              <span class="trust-pill">SimplePractice</span>
+              <span class="trust-pill">TherapyNotes</span>
+              <span class="trust-pill">Jane App</span>
+              <span class="trust-pill">Healthie</span>
+              <span class="trust-pill-more">+ more</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Right: Dashboard Card ── -->
+        <div class="hero-right reveal" style="transition-delay:0.15s;">
+
+          <!-- Floating badge: bookings -->
+          <div class="floating-badge badge-bookings" aria-hidden="true">
+            <div class="badge-icon green">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.5L6.5 12 13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="badge-text">
+              <span class="badge-top-line">+43% Bookings</span>
+              <span class="badge-sub-line">Last 30 days</span>
+            </div>
+          </div>
+
+          <!-- Dashboard card -->
+          <div class="dashboard-card">
+
+            <div class="card-header">
+              <span class="card-title">Practice Dashboard — This Month</span>
+              <span class="card-live-dot">Live</span>
+            </div>
+
+            <!-- Metrics -->
+            <div class="card-metrics">
+              <div class="metric-box orange-bg">
+                <span class="metric-value" data-counter="24" data-suffix="">0</span>
+                <span class="metric-label">New Clients</span>
+              </div>
+              <div class="metric-box navy-bg">
+                <span class="metric-value" data-counter="89" data-suffix="%">0</span>
+                <span class="metric-label">Utilization</span>
+              </div>
+              <div class="metric-box orange-bg">
+                <span class="metric-value" data-counter="186" data-prefix="$">0</span>
+                <span class="metric-label">Avg CAC</span>
+              </div>
+            </div>
+
+            <!-- Progress bars -->
+            <div class="card-progress">
+              <div class="progress-row">
+                <div class="progress-meta">
+                  <span class="progress-label">Google Ads</span>
+                  <span class="progress-pct">78%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill orange" data-width="78"></div>
+                </div>
+              </div>
+              <div class="progress-row">
+                <div class="progress-meta">
+                  <span class="progress-label">Local SEO</span>
+                  <span class="progress-pct">65%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill navy" data-width="65"></div>
+                </div>
+              </div>
+              <div class="progress-row">
+                <div class="progress-meta">
+                  <span class="progress-label">Reactivation</span>
+                  <span class="progress-pct">91%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill green" data-width="91"></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.dashboard-card -->
+
+          <!-- Floating badge: HIPAA -->
+          <div class="floating-badge badge-hipaa" aria-hidden="true">
+            <div class="badge-icon blue">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 1.5L2 4v4c0 3.31 2.5 5.72 6 6.5 3.5-.78 6-3.19 6-6.5V4L8 1.5z" fill="#2B5AA5" opacity="0.25"/>
+                <path d="M8 1.5L2 4v4c0 3.31 2.5 5.72 6 6.5 3.5-.78 6-3.19 6-6.5V4L8 1.5z" stroke="#2B5AA5" stroke-width="1.25" stroke-linejoin="round"/>
+                <path d="M5.5 8l2 2 3.5-3.5" stroke="#2B5AA5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="badge-text">
+              <span class="badge-top-line">HIPAA Compliant</span>
+              <span class="badge-sub-line">BAA Signed</span>
+            </div>
+          </div>
+
+        </div><!-- /.hero-right -->
+      </div><!-- /.hero-grid -->
+    </div><!-- /.container -->
+  </section>
+
+  <!-- ── Footer placeholder (include _footer.html in subsequent chunks) ── -->
+
+  <script>
+    // ─── Scroll progress bar ─────────────────────────────────────────────────
+    (function () {
+      var bar = document.getElementById('scroll-progress');
+      function updateProgress() {
+        var scrolled = window.scrollY;
+        var total    = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+    })();
+
+    // ─── Sticky nav ──────────────────────────────────────────────────────────
+    (function () {
+      var nav    = document.getElementById('wf-nav');
+      var spacer = nav.nextElementSibling;
+      function onScroll() {
+        if (window.scrollY > 10) {
+          nav.classList.add('stuck');
+          if (spacer) spacer.style.height = '64px';
+        } else {
+          nav.classList.remove('stuck');
+          if (spacer) spacer.style.height = '72px';
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // ─── IntersectionObserver — .reveal ─────────────────────────────────────
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // ─── Counter animation ───────────────────────────────────────────────────
+    (function () {
+      var counters = document.querySelectorAll('[data-counter]');
+      var animated = false;
+
+      function animateCounters() {
+        if (animated) return;
+        animated = true;
+        counters.forEach(function (el) {
+          var target = parseInt(el.getAttribute('data-counter'), 10);
+          var prefix = el.getAttribute('data-prefix') || '';
+          var suffix = el.getAttribute('data-suffix') || '';
+          var duration = 1400;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            // ease-out cubic
+            var eased   = 1 - Math.pow(1 - progress, 3);
+            var current = Math.round(eased * target);
+            el.textContent = prefix + current + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }
+
+      // ─── Progress bar animation ─────────────────────────────────────────
+      var fills    = document.querySelectorAll('.progress-fill');
+      var barsDone = false;
+
+      function animateBars() {
+        if (barsDone) return;
+        barsDone = true;
+        fills.forEach(function (fill) {
+          var w = fill.getAttribute('data-width');
+          // slight delay so it feels sequential
+          setTimeout(function () { fill.style.width = w + '%'; }, 200);
+        });
+      }
+
+      // Trigger both when card enters viewport
+      var card = document.querySelector('.dashboard-card');
+      if (!card) return;
+
+      if (!('IntersectionObserver' in window)) {
+        animateCounters();
+        animateBars();
+        return;
+      }
+
+      var cardIO = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          animateCounters();
+          animateBars();
+          cardIO.disconnect();
+        }
+      }, { threshold: 0.3 });
+      cardIO.observe(card);
+    })();
+  </script>
+
+</body>
+</html>
