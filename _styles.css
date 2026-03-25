@@ -1,0 +1,183 @@
+/* W&F Brand Design System */
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap');
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────────── */
+:root {
+  --navy:       #1E3D6F;
+  --orange:     #E8713A;
+  --dark:       #0F1C33;
+  --mid-blue:   #2B5AA5;
+  --light-gray: #F4F6FA;
+  --white:      #ffffff;
+
+  --font-heading: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  --transition: 0.25s ease;
+  --radius:     6px;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ─── Container ──────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ─── Typography Utility ─────────────────────────────────────────────────────── */
+.sora {
+  font-family: var(--font-heading);
+}
+
+h1,
+h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--mid-blue);
+  line-height: 1.3;
+}
+
+.overline {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+.btn-primary,
+.btn-outline,
+.btn-white {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  border-color: var(--orange);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #d4622e;
+  border-color: #d4622e;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
+}
+
+.btn-white:hover,
+.btn-white:focus-visible {
+  background: var(--light-gray);
+  border-color: var(--light-gray);
+  transform: translateY(-2px);
+}
+
+/* ─── Scroll Reveal Animation ────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Responsive Breakpoints ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .btn-primary,
+  .btn-outline,
+  .btn-white {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+}
