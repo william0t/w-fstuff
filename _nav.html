@@ -1,0 +1,209 @@
+<!-- W&F Shared Navigation Component -->
+<!-- Include in every page immediately after <body> -->
+<link rel="stylesheet" href="/_styles.css">
+
+<style>
+  /* ─── Nav component styles ──────────────────────────────────────────────── */
+  .wf-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  }
+
+  .wf-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    transition: height 0.3s ease;
+  }
+
+  /* Transparent by default (hero sits behind nav) */
+  .wf-nav:not(.stuck) {
+    background: transparent;
+  }
+
+  /* Stuck / scrolled state */
+  .wf-nav.stuck {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 1px 0 rgba(30, 61, 111, 0.08), 0 4px 24px rgba(30, 61, 111, 0.08);
+  }
+
+  .wf-nav.stuck .wf-nav__inner {
+    height: 64px;
+  }
+
+  /* Logo */
+  .wf-nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .wf-nav__logo-mark {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .wf-nav__logo-text {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  /* When nav is over a dark hero, flip logo text white */
+  .wf-nav--light:not(.stuck) .wf-nav__logo-text {
+    color: var(--white);
+  }
+
+  .wf-nav--light:not(.stuck) .wf-nav__logo-mark .nav-triangle {
+    fill: var(--white);
+  }
+
+  /* Nav links */
+  .wf-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .wf-nav__links a {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--navy);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    transition: color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .wf-nav--light:not(.stuck) .wf-nav__links a {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .wf-nav__links a:hover {
+    color: var(--orange);
+    background: rgba(232, 113, 58, 0.06);
+  }
+
+  .wf-nav--light:not(.stuck) .wf-nav__links a:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Nav CTA */
+  .wf-nav__cta {
+    font-family: 'Sora', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.875rem !important;
+    padding: 10px 20px !important;
+    background: var(--orange) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--orange) !important;
+    border-radius: var(--radius) !important;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .wf-nav__cta:hover {
+    background: #d4622e !important;
+    border-color: #d4622e !important;
+    transform: translateY(-1px);
+  }
+
+  /* Right side: links + CTA grouped */
+  .wf-nav__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Mobile: hide links, keep CTA */
+  @media (max-width: 768px) {
+    .wf-nav__links {
+      display: none;
+    }
+
+    .wf-nav__inner {
+      height: 60px;
+    }
+
+    .wf-nav.stuck .wf-nav__inner {
+      height: 56px;
+    }
+
+    .wf-nav__logo-text {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<nav class="wf-nav" id="wf-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="wf-nav__inner">
+
+      <!-- Logo -->
+      <a href="/" class="wf-nav__logo" aria-label="William & Friends — Home">
+        <svg class="wf-nav__logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon class="nav-triangle" points="16,2 30,28 2,28" fill="#1E3D6F"/>
+        </svg>
+        <span class="wf-nav__logo-text">William &amp; Friends</span>
+      </a>
+
+      <!-- Right: links + CTA -->
+      <div class="wf-nav__right">
+        <ul class="wf-nav__links" role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/ehr-integration">EHR Compatibility</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+        <a href="/contact" class="wf-nav__cta">Book a Free Strategy Call</a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer to prevent content jumping under fixed nav -->
+<div class="wf-nav-spacer" style="height:72px;" aria-hidden="true"></div>
+
+<script>
+  (function () {
+    var nav = document.getElementById('wf-nav');
+    var spacer = document.querySelector('.wf-nav-spacer');
+
+    function onScroll() {
+      if (window.scrollY > 10) {
+        nav.classList.add('stuck');
+        if (spacer) spacer.style.height = '64px';
+      } else {
+        nav.classList.remove('stuck');
+        if (spacer) spacer.style.height = '72px';
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on load in case page is already scrolled
+  })();
+</script>
