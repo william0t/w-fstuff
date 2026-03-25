@@ -560,9 +560,7 @@
     <div class="container">
       <div class="wf-nav__inner">
         <a href="/" class="wf-nav__logo" aria-label="William & Friends — Home">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <polygon points="16,2 30,28 2,28" fill="#1E3D6F"/>
-          </svg>
+          <img src="logo.svg" width="36" height="33" alt="" aria-hidden="true" style="display:block;">
           <span class="wf-nav__logo-text">William &amp; Friends</span>
         </a>
         <div class="wf-nav__right">
@@ -1074,7 +1072,121 @@
     </div>
   </section>
 
-  <!-- ── Footer placeholder (include _footer.html in subsequent chunks) ── -->
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <style>
+    .wf-footer { background:#0F1C33; color:rgba(255,255,255,0.75); font-family:'DM Sans',sans-serif; position:relative; overflow:hidden; }
+    .wf-footer__watermark { position:absolute; bottom:-40px; right:-20px; font-family:'Sora',sans-serif; font-weight:700; font-size:220px; line-height:1; color:#fff; opacity:0.015; pointer-events:none; user-select:none; letter-spacing:-0.04em; white-space:nowrap; }
+    .wf-footer__main { padding:72px 0 56px; position:relative; z-index:1; }
+    .wf-footer__grid { display:grid; grid-template-columns:1.6fr 1fr 1fr 1.3fr; gap:48px; }
+    .wf-footer__brand-logo { display:flex; align-items:center; gap:10px; margin-bottom:16px; text-decoration:none; }
+    .wf-footer__brand-logo span { font-family:'Sora',sans-serif; font-weight:700; font-size:1rem; color:#fff; letter-spacing:-0.01em; }
+    .wf-footer__tagline { font-size:0.9rem; line-height:1.55; color:rgba(255,255,255,0.6); margin-bottom:24px; max-width:260px; }
+    .wf-footer__social { display:flex; gap:12px; }
+    .wf-footer__social a { display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); transition:background 0.2s,color 0.2s; }
+    .wf-footer__social a:hover { background:var(--orange); color:#fff; }
+    .wf-footer__social svg { width:18px; height:18px; fill:currentColor; }
+    .wf-footer__col-heading { font-family:'Sora',sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; color:#fff; margin-bottom:18px; }
+    .wf-footer__links { display:flex; flex-direction:column; gap:10px; list-style:none; margin:0; padding:0; }
+    .wf-footer__links a { font-size:0.9rem; color:rgba(255,255,255,0.6); transition:color 0.2s; }
+    .wf-footer__links a:hover { color:var(--orange); }
+    .wf-footer__contact-info { font-size:0.9rem; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:20px; }
+    .wf-footer__contact-info a { color:rgba(255,255,255,0.75); transition:color 0.2s; }
+    .wf-footer__contact-info a:hover { color:var(--orange); }
+    .wf-footer__book-btn { display:inline-block; font-family:'Sora',sans-serif; font-weight:700; font-size:0.875rem; padding:12px 20px; background:var(--orange); color:#fff; border-radius:var(--radius); transition:background 0.2s,transform 0.2s; white-space:nowrap; }
+    .wf-footer__book-btn:hover { background:#d4622e; transform:translateY(-1px); }
+    .wf-footer__bottom { position:relative; z-index:1; border-top:1px solid rgba(255,255,255,0.08); padding:20px 0; }
+    .wf-footer__bottom-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .wf-footer__copyright, .wf-footer__made { font-size:0.8rem; color:rgba(255,255,255,0.4); }
+    .wf-footer__legal { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .wf-footer__legal a { font-size:0.8rem; color:rgba(255,255,255,0.4); transition:color 0.2s; }
+    .wf-footer__legal a:hover { color:rgba(255,255,255,0.75); }
+    @media(max-width:1024px){ .wf-footer__grid { grid-template-columns:1fr 1fr; gap:40px; } }
+    @media(max-width:768px){
+      .wf-footer__main { padding:52px 0 40px; }
+      .wf-footer__grid { grid-template-columns:1fr; gap:36px; }
+      .wf-footer__bottom-inner { flex-direction:column; align-items:flex-start; gap:8px; }
+      .wf-footer__watermark { font-size:140px; right:-10px; bottom:-20px; }
+    }
+  </style>
+
+  <footer class="wf-footer" aria-label="Site footer">
+    <span class="wf-footer__watermark" aria-hidden="true">W&amp;F</span>
+    <div class="wf-footer__main">
+      <div class="container">
+        <div class="wf-footer__grid">
+
+          <!-- Col 1: Brand -->
+          <div>
+            <a href="/" class="wf-footer__brand-logo" aria-label="William &amp; Friends — Home">
+              <img src="logo.svg" width="36" height="33" alt="" aria-hidden="true" style="display:block; filter:brightness(0) invert(1);">
+              <span>William &amp; Friends</span>
+            </a>
+            <p class="wf-footer__tagline">The growth layer for therapy practices. We sit on top of your EHR. We don't replace it.</p>
+            <div class="wf-footer__social">
+              <a href="https://linkedin.com/company/williamandfriends" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://instagram.com/williamandfriends" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Services -->
+          <div>
+            <p class="wf-footer__col-heading">Services</p>
+            <ul class="wf-footer__links">
+              <li><a href="/services">All Services</a></li>
+              <li><a href="/services/google-ads-therapy-practices">Google Ads</a></li>
+              <li><a href="/services/local-seo-mental-health-practices">Local SEO</a></li>
+              <li><a href="/services/hipaa-marketing-automation">HIPAA Automation</a></li>
+              <li><a href="/services/waitlist-reactivation-therapy">Waitlist Reactivation</a></li>
+              <li><a href="/services/therapy-practice-reviews">Review Strategy</a></li>
+              <li><a href="/ehr-integration">EHR Compatibility</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Company -->
+          <div>
+            <p class="wf-footer__col-heading">Company</p>
+            <ul class="wf-footer__links">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/how-it-works">How It Works</a></li>
+              <li><a href="/results">Results</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Contact -->
+          <div>
+            <p class="wf-footer__col-heading">Get in Touch</p>
+            <div class="wf-footer__contact-info">
+              Denver, CO<br>
+              <a href="mailto:hello@williamandfriends.com">hello@williamandfriends.com</a>
+            </div>
+            <a href="/contact" class="wf-footer__book-btn">Book Your Free Strategy Call</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-footer__bottom">
+      <div class="container">
+        <div class="wf-footer__bottom-inner">
+          <span class="wf-footer__copyright">&copy; 2026 William &amp; Friends</span>
+          <nav class="wf-footer__legal" aria-label="Legal links">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/hipaa-privacy">HIPAA Privacy Notice</a>
+          </nav>
+          <span class="wf-footer__made">Made in Denver, CO</span>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <style>
     /* ─── Services Section ────────────────────────────────────────────────── */

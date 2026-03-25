@@ -30,6 +30,8 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -37,6 +39,7 @@ body {
   font-weight: 400;
   color: var(--dark);
   background: var(--white);
+  width: 100%;
   overflow-x: hidden;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;

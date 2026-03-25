@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" fill="none">
+  <!-- ── Left mountain body (navy) ── -->
+  <polygon points="8,188 82,10 156,188" fill="#1E3D6F"/>
+
+  <!-- Orange left-edge stripe on left mountain -->
+  <polygon points="8,188 30,188 100,22 82,10" fill="#E8713A"/>
+
+  <!-- White lightning bolt / snow through left mountain -->
+  <polygon points="82,10 66,62 86,62 48,118 92,80 74,80 88,34" fill="#ffffff"/>
+
+  <!-- ── Right mountain body (navy) ── -->
+  <polygon points="118,188 162,58 204,188" fill="#1E3D6F"/>
+
+  <!-- Orange right-edge stripe on right mountain -->
+  <polygon points="204,188 188,188 146,70 162,58" fill="#E8713A"/>
+
+  <!-- White lightning bolt through right mountain -->
+  <polygon points="162,58 150,94 164,94 136,148 170,116 156,116 164,78" fill="#ffffff"/>
+
+  <!-- ── Small detached triangle (far right) ── -->
+  <polygon points="184,188 200,150 216,188" fill="#1E3D6F"/>
+</svg>
